@@ -14,6 +14,9 @@ namespace ElevatorSurvey
             
             var parser = new InputPatternParser();
             var dto = parser.Parse(input, pattern);
+
+            var builder = new SurveyBuilder();
+            var survey = builder.Build(dto);
         }
 
     }
