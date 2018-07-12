@@ -21,6 +21,12 @@ namespace ElevatorSurvey
 
             var mostShift = report.ShiftMostUsed(SurveyRepository.Surveys);
             Console.WriteLine($"The most used shift is: {mostShift.Key}. Used: {mostShift.Sum} times.");
+
+            var mostElevatorAndShift = report.MostUsedElevatorAndMostUsedShift(SurveyRepository.Surveys);
+            Console.WriteLine($"The most used elevator is {mostElevatorAndShift.Key1} on the shift {mostElevatorAndShift.Key2}");
+
+            var leastElevatorAndShift = report.LeastUsedElevatorAndLeastUsedShift(SurveyRepository.Surveys);
+            Console.WriteLine($"The least used elevator is {leastElevatorAndShift.Key1} on the shift {leastElevatorAndShift.Key2}");
         }
     }
 }

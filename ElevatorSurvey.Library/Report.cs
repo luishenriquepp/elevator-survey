@@ -31,6 +31,34 @@ namespace ElevatorSurvey
                 .OrderByDescending(o => o.Sum)
                 .First();
         }
+
+        public Result2 MostUsedElevatorAndMostUsedShift(List<Survey> surveys)
+        {
+            return surveys
+                .GroupBy(s => new { s.Elevator, s.Shift})
+                .Select(group => new Result2
+                {
+                    Key1 = group.Key.Elevator.ToString(),
+                    Key2 = group.Key.Shift.ToString(),
+                    Sum = group.Count()
+                })
+                .OrderByDescending(o => o.Sum)
+                .First();
+        }
+
+        public Result2 LeastUsedElevatorAndLeastUsedShift(List<Survey> surveys)
+        {
+            return surveys
+                .GroupBy(s => new { s.Elevator, s.Shift})
+                .Select(group => new Result2
+                {
+                    Key1 = group.Key.Elevator.ToString(),
+                    Key2 = group.Key.Shift.ToString(),
+                    Sum = group.Count()
+                })
+                .OrderBy(o => o.Sum)
+                .First();
+        }
     }
 
     public class Result
@@ -38,10 +66,13 @@ namespace ElevatorSurvey
         public string Key { get; set; }
         public int Sum { get; set; }
     }
+
+    public class Result2
+    {
+        public string Key1 { get; set; }
+        public string Key2 { get; set; }
+        public int Sum { get; set; }
+    }
 }
 
-// Qual é o andar menos utilizado pelos usuários
-// Qual o período de maior utilização do conjunto de elevadores
-// Qual é o elevador mais frequentado e o período que se encontra maior fluxo
-// Qual é o elevador menos frequentado e o período que se encontra menor fluxo
 // Qual o percentual de uso de cada elevador com relação a todos os serviços prestado
