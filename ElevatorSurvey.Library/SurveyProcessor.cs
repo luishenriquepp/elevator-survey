@@ -17,7 +17,8 @@ namespace ElevatorSurvey
 
             var builder = new SurveyBuilder();
             var survey = builder.Build(dto);
-        }
 
+            SurveyRepository.Surveys.Add(survey);
+        }
     }
 }
