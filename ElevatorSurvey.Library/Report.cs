@@ -59,12 +59,25 @@ namespace ElevatorSurvey
                 .OrderBy(o => o.Sum)
                 .First();
         }
+
+        public IEnumerable<Result> ElevatorsFrequencyUse(List<Survey> surveys)
+        {
+            return surveys
+                .GroupBy(s => s.Elevator)
+                .Select(g => new Result
+                {
+                    Key = g.Key.ToString(),
+                    Percentage = (g.Count()/(double)surveys.Count()) * 100
+                })
+                .OrderBy(o => o.Percentage);
+        }
     }
 
     public class Result
     {
         public string Key { get; set; }
         public int Sum { get; set; }
+        public double Percentage { get; set; }
     }
 
     public class Result2
@@ -74,5 +87,3 @@ namespace ElevatorSurvey
         public int Sum { get; set; }
     }
 }
-
-// Qual o percentual de uso de cada elevador com relação a todos os serviços prestado

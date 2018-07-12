@@ -35,6 +35,11 @@ namespace ElevatorSurvey
 
             var leastElevatorAndShift = report.LeastUsedElevatorAndLeastUsedShift(SurveyRepository.Surveys);
             Console.WriteLine($"The least used elevator is {leastElevatorAndShift.Key1} on the shift {leastElevatorAndShift.Key2}");
+
+            var values = report.ElevatorsFrequencyUse(SurveyRepository.Surveys);
+            values.ToList().ForEach(v => {
+                Console.WriteLine($"The elevator {v.Key} has been used {Math.Floor(v.Percentage)}%");
+            });
         }
     }
 }
