@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace ElevatorSurvey
 {
-    public class SurveyReport
+    public class Report
     {
-        public Result LeastFavoriteFloot(List<Survey> surveys)
+        public Result LeastFavoriteFloor(List<Survey> surveys)
         {
             return surveys
                 .GroupBy(s => s.Floor)
