@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace ElevatorSurvey
 {
-    public class InputPatternReader
+    public class InputPatternReader : IInputPatternReader
     {
         private const string patternOne = @"\b\d{1}[A-Z]{2}\b";
         private const string patternTwo = @"\b\d{2}[A-Z]{2}\b";

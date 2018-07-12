@@ -2,7 +2,7 @@ using System;
 
 namespace ElevatorSurvey
 {
-    public class SurveyBuilder
+    public class SurveyBuilder : ISurveyBuilder
     {
         public Survey Build(SurveyDto dto)
         {

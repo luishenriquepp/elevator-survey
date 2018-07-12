@@ -2,21 +2,32 @@ using System;
 
 namespace ElevatorSurvey
 {
-    public class SurveyProcessor
+    public class SurveyProcessor : ISurveyProcessor
     {
+        private readonly IInputPatternReader _inputPatternReader;
+        private readonly IInputPatternParser _inputPatternParser;
+        private readonly ISurveyBuilder _surveyBuilder;
+
+        public SurveyProcessor(
+            IInputPatternReader inputPatternReader,
+            IInputPatternParser inputPatternParser,
+            ISurveyBuilder surveyBuilder)
+        {
+            _inputPatternReader = inputPatternReader;
+            _inputPatternParser = inputPatternParser;
+            _surveyBuilder = surveyBuilder;
+        }
+
         public void Process(string input)
         {
-            var reader = new InputPatternReader();
-            var pattern = reader.Define(input);
+            var pattern = _inputPatternReader.Define(input);
             
             if (pattern == RegexPattern.NoPattern)
                 throw new Exception();
             
-            var parser = new InputPatternParser();
-            var dto = parser.Parse(input, pattern);
+            var dto = _inputPatternParser.Parse(input, pattern);
 
-            var builder = new SurveyBuilder();
-            var survey = builder.Build(dto);
+            var survey = _surveyBuilder.Build(dto);
 
             SurveyRepository.Surveys.Add(survey);
         }

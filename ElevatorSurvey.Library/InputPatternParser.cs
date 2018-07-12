@@ -2,7 +2,7 @@ using System;
 
 namespace ElevatorSurvey
 {
-    public class InputPatternParser
+    public class InputPatternParser : IInputPatternParser
     {
         public SurveyDto Parse(string value, RegexPattern pattern)
         {

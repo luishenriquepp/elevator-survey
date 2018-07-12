@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;  
 
 namespace ElevatorSurvey
 {
@@ -7,10 +8,17 @@ namespace ElevatorSurvey
     {
         static void Main(string[] args)
         {
-            var samples = Seed.Samples();
+            var serviceProvider = new ServiceCollection()
+            .AddSingleton<IInputPatternReader, InputPatternReader>()
+            .AddSingleton<IInputPatternParser, InputPatternParser>()
+            .AddSingleton<ISurveyBuilder, SurveyBuilder>()
+            .AddSingleton<ISurveyProcessor, SurveyProcessor>()
+            .BuildServiceProvider();
 
-            var processor = new SurveyProcessor();        
+            var processor = serviceProvider.GetService<ISurveyProcessor>();
             
+            var samples = Seed.Samples();
+                  
             samples.ForEach(sample => {
                 processor.Process(sample);
             });
